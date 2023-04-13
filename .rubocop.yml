@@ -34,3 +34,6 @@ Style:
 Style/NumericLiterals:
   Exclude:
     - 'lib/**/*'
+
+Style/Semicolon:
+  AllowAsExpressionSeparator: true
