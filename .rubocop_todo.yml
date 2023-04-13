@@ -480,19 +480,6 @@ Style/RedundantInterpolation:
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-Style/RedundantParentheses:
-  Exclude:
-    - 'lib/axlsx/drawing/area_series.rb'
-    - 'lib/axlsx/drawing/bar_3D_chart.rb'
-    - 'lib/axlsx/drawing/bar_chart.rb'
-    - 'lib/axlsx/drawing/line_3D_chart.rb'
-    - 'lib/axlsx/drawing/line_series.rb'
-    - 'lib/axlsx/drawing/scatter_series.rb'
-    - 'lib/axlsx/package.rb'
-    - 'lib/axlsx/workbook/worksheet/pivot_table.rb'
-    - 'lib/axlsx/workbook/worksheet/worksheet.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 Style/RedundantRegexpEscape:
   Exclude:
     - 'lib/axlsx.rb'
