@@ -55,11 +55,6 @@ Performance/InefficientHashSearch:
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-Performance/RedundantSplitRegexpArgument:
-  Exclude:
-    - 'lib/axlsx/workbook/worksheet/sheet_protection.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 Performance/StringIdentifierArgument:
   Exclude:
     - 'lib/axlsx/drawing/pic.rb'
