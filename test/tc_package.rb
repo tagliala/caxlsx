@@ -226,7 +226,7 @@ class TestPackage < Test::Unit::TestCase
   end
 
   def test_serialization_creates_identical_files_for_identical_packages
-    package_1, package_2 = 2.times.map do
+    package_1, package_2 = Array.new(2) do
       Axlsx::Package.new(:created_at => Time.utc(2013, 1, 1)).tap do |p|
         p.workbook.add_worksheet(:name => "Basic Worksheet") do |sheet|
           sheet.add_row [1, 2, 3]
@@ -250,22 +250,22 @@ class TestPackage < Test::Unit::TestCase
   def test_parts
     p = @package.send(:parts)
     # all parts have an entry
-    assert_equal(p.select { |part| part[:entry] =~ /_rels\/\.rels/ }.size, 1, "rels missing")
-    assert_equal(p.select { |part| part[:entry] =~ /docProps\/core\.xml/ }.size, 1, "core missing")
-    assert_equal(p.select { |part| part[:entry] =~ /docProps\/app\.xml/ }.size, 1, "app missing")
-    assert_equal(p.select { |part| part[:entry] =~ /xl\/_rels\/workbook\.xml\.rels/ }.size, 1, "workbook rels missing")
-    assert_equal(p.select { |part| part[:entry] =~ /xl\/workbook\.xml/ }.size, 1, "workbook missing")
-    assert_equal(p.select { |part| part[:entry] =~ /\[Content_Types\]\.xml/ }.size, 1, "content types missing")
-    assert_equal(p.select { |part| part[:entry] =~ /xl\/styles\.xml/ }.size, 1, "styles missin")
-    assert_equal(p.select { |part| part[:entry] =~ /xl\/drawings\/_rels\/drawing\d\.xml\.rels/ }.size, @package.workbook.drawings.size, "one or more drawing rels missing")
-    assert_equal(p.select { |part| part[:entry] =~ /xl\/drawings\/drawing\d\.xml/ }.size, @package.workbook.drawings.size, "one or more drawings missing")
-    assert_equal(p.select { |part| part[:entry] =~ /xl\/charts\/chart\d\.xml/ }.size, @package.workbook.charts.size, "one or more charts missing")
-    assert_equal(p.select { |part| part[:entry] =~ /xl\/worksheets\/sheet\d\.xml/ }.size, @package.workbook.worksheets.size, "one or more sheet missing")
-    assert_equal(p.select { |part| part[:entry] =~ /xl\/worksheets\/_rels\/sheet\d\.xml\.rels/ }.size, @package.workbook.worksheets.size, "one or more sheet rels missing")
-    assert_equal(p.select { |part| part[:entry] =~ /xl\/comments\d\.xml/ }.size, @package.workbook.worksheets.size, "one or more sheet rels missing")
-    assert_equal(p.select { |part| part[:entry] =~ /xl\/pivotTables\/pivotTable\d\.xml/ }.size, @package.workbook.worksheets.first.pivot_tables.size, "one or more pivot tables missing")
-    assert_equal(p.select { |part| part[:entry] =~ /xl\/pivotTables\/_rels\/pivotTable\d\.xml.rels/ }.size, @package.workbook.worksheets.first.pivot_tables.size, "one or more pivot tables rels missing")
-    assert_equal(p.select { |part| part[:entry] =~ /xl\/pivotCache\/pivotCacheDefinition\d\.xml/ }.size, @package.workbook.worksheets.first.pivot_tables.size, "one or more pivot tables missing")
+    assert_equal(p.count { |part| part[:entry].include?('_rels/.rels') }, 1, "rels missing")
+    assert_equal(p.count { |part| part[:entry].include?('docProps/core.xml') }, 1, "core missing")
+    assert_equal(p.count { |part| part[:entry].include?('docProps/app.xml') }, 1, "app missing")
+    assert_equal(p.count { |part| part[:entry].include?('xl/_rels/workbook.xml.rels') }, 1, "workbook rels missing")
+    assert_equal(p.count { |part| part[:entry].include?('xl/workbook.xml') }, 1, "workbook missing")
+    assert_equal(p.count { |part| part[:entry].include?('[Content_Types].xml') }, 1, "content types missing")
+    assert_equal(p.count { |part| part[:entry].include?('xl/styles.xml') }, 1, "styles missin")
+    assert_equal(p.count { |part| part[:entry] =~ /xl\/drawings\/_rels\/drawing\d\.xml\.rels/ }, @package.workbook.drawings.size, "one or more drawing rels missing")
+    assert_equal(p.count { |part| part[:entry] =~ /xl\/drawings\/drawing\d\.xml/ }, @package.workbook.drawings.size, "one or more drawings missing")
+    assert_equal(p.count { |part| part[:entry] =~ /xl\/charts\/chart\d\.xml/ }, @package.workbook.charts.size, "one or more charts missing")
+    assert_equal(p.count { |part| part[:entry] =~ /xl\/worksheets\/sheet\d\.xml/ }, @package.workbook.worksheets.size, "one or more sheet missing")
+    assert_equal(p.count { |part| part[:entry] =~ /xl\/worksheets\/_rels\/sheet\d\.xml\.rels/ }, @package.workbook.worksheets.size, "one or more sheet rels missing")
+    assert_equal(p.count { |part| part[:entry] =~ /xl\/comments\d\.xml/ }, @package.workbook.worksheets.size, "one or more sheet rels missing")
+    assert_equal(p.count { |part| part[:entry] =~ /xl\/pivotTables\/pivotTable\d\.xml/ }, @package.workbook.worksheets.first.pivot_tables.size, "one or more pivot tables missing")
+    assert_equal(p.count { |part| part[:entry] =~ /xl\/pivotTables\/_rels\/pivotTable\d\.xml.rels/ }, @package.workbook.worksheets.first.pivot_tables.size, "one or more pivot tables rels missing")
+    assert_equal(p.count { |part| part[:entry] =~ /xl\/pivotCache\/pivotCacheDefinition\d\.xml/ }, @package.workbook.worksheets.first.pivot_tables.size, "one or more pivot tables missing")
 
     # no mystery parts
     assert_equal(25, p.size)
@@ -280,7 +280,7 @@ class TestPackage < Test::Unit::TestCase
     @package.use_shared_strings = true
     @package.to_stream # ensure all cell_serializer paths are hit
     p = @package.send(:parts)
-    assert_equal(p.select { |part| part[:entry] =~ /xl\/sharedStrings.xml/ }.size, 1, "shared strings table missing")
+    assert_equal(p.count { |part| part[:entry] =~ /xl\/sharedStrings.xml/ }, 1, "shared strings table missing")
   end
 
   def test_workbook_is_a_workbook
@@ -289,19 +289,19 @@ class TestPackage < Test::Unit::TestCase
 
   def test_base_content_types
     ct = @package.send(:base_content_types)
-    assert(ct.select { |c| c.ContentType == Axlsx::RELS_CT }.size == 1, "rels content type missing")
-    assert(ct.select { |c| c.ContentType == Axlsx::XML_CT }.size == 1, "xml content type missing")
-    assert(ct.select { |c| c.ContentType == Axlsx::APP_CT }.size == 1, "app content type missing")
-    assert(ct.select { |c| c.ContentType == Axlsx::CORE_CT }.size == 1, "core content type missing")
-    assert(ct.select { |c| c.ContentType == Axlsx::STYLES_CT }.size == 1, "styles content type missing")
-    assert(ct.select { |c| c.ContentType == Axlsx::WORKBOOK_CT }.size == 1, "workbook content type missing")
+    assert(ct.count { |c| c.ContentType == Axlsx::RELS_CT } == 1, "rels content type missing")
+    assert(ct.count { |c| c.ContentType == Axlsx::XML_CT } == 1, "xml content type missing")
+    assert(ct.count { |c| c.ContentType == Axlsx::APP_CT } == 1, "app content type missing")
+    assert(ct.count { |c| c.ContentType == Axlsx::CORE_CT } == 1, "core content type missing")
+    assert(ct.count { |c| c.ContentType == Axlsx::STYLES_CT } == 1, "styles content type missing")
+    assert(ct.count { |c| c.ContentType == Axlsx::WORKBOOK_CT } == 1, "workbook content type missing")
     assert(ct.size == 6)
   end
 
   def test_content_type_added_with_shared_strings
     @package.use_shared_strings = true
     ct = @package.send(:content_types)
-    assert(ct.select { |type| type.ContentType == Axlsx::SHARED_STRINGS_CT }.size == 1)
+    assert(ct.count { |type| type.ContentType == Axlsx::SHARED_STRINGS_CT } == 1)
   end
 
   def test_name_to_indices

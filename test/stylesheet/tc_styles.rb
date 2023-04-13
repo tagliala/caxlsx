@@ -98,10 +98,10 @@ class TestStyles < Test::Unit::TestCase
     b_opts = { :border => { :diagonalUp => 1, :edges => [:left, :right], :color => "FFDADADA", :style => :thick } }
     @styles.parse_border_options b_opts
     b = @styles.borders.last
-    left = b.prs.select { |bpr| bpr.name == :left }[0]
-    right = b.prs.select { |bpr| bpr.name == :right }[0]
-    top = b.prs.select { |bpr| bpr.name == :top }[0]
-    bottom = b.prs.select { |bpr| bpr.name == :bottom }[0]
+    left = b.prs.find { |bpr| bpr.name == :left }
+    right = b.prs.find { |bpr| bpr.name == :right }
+    top = b.prs.find { |bpr| bpr.name == :top }
+    bottom = b.prs.find { |bpr| bpr.name == :bottom }
     assert_equal(top, nil, "unspecified top edge should not be created")
     assert_equal(bottom, nil, "unspecified bottom edge should not be created")
     assert(left.is_a?(Axlsx::BorderPr), "specified left edge is set")
@@ -140,7 +140,8 @@ class TestStyles < Test::Unit::TestCase
     original_attributes = Axlsx.instance_values_for(original)
     assert_equal(1, created.b)
     assert_equal(99, created.sz)
-    copied = original_attributes.reject { |key, value| %w(b sz).include? key }
+    ignored_attributes = %w(b sz)
+    copied = original_attributes.reject { |key, value| ignored_attributes.include? key }
     instance_vals = Axlsx.instance_values_for(created)
     copied.each do |key, value|
       assert_equal(instance_vals[key], value)
