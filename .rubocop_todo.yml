@@ -28,11 +28,6 @@ Layout/HeredocIndentation:
     - 'lib/axlsx/drawing/vml_drawing.rb'
     - 'lib/axlsx/drawing/vml_shape.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-Performance/BlockGivenWithExplicitBlock:
-  Exclude:
-    - 'lib/axlsx/util/serialized_attributes.rb'
-
 # Configuration parameters: MinSize.
 Performance/CollectionLiteralInLoop:
   Exclude:

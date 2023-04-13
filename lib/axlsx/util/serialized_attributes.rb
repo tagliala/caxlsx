@@ -32,7 +32,7 @@ module Axlsx
     def serialized_tag(tagname, str, additional_attributes = {}, &block)
       str << "<#{tagname} "
       serialized_attributes(str, additional_attributes)
-      if block_given?
+      if block
         str << '>'
         yield
         str << "</#{tagname}>"
@@ -78,7 +78,7 @@ module Axlsx
         value = values[attribute_name.to_s]
         next if value.nil?
 
-        value = yield value if block_given?
+        value = yield value if block
         element_name = Axlsx.camel(attribute_name, false)
         str << "<#{element_name}>#{value}</#{element_name}>"
       end
