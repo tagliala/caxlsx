@@ -54,11 +54,6 @@ Performance/InefficientHashSearch:
     - 'lib/axlsx/stylesheet/styles.rb'
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-Performance/StringIdentifierArgument:
-  Exclude:
-    - 'lib/axlsx/drawing/pic.rb'
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Performance/StringInclude:
   Exclude:
