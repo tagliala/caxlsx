@@ -31,9 +31,5 @@ Minitest:
 Style:
   Enabled: true
 
-Style/NumericLiterals:
-  Exclude:
-    - 'lib/**/*'
-
 Style/Semicolon:
   AllowAsExpressionSeparator: true
