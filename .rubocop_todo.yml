@@ -55,12 +55,6 @@ Performance/InefficientHashSearch:
     - 'lib/axlsx/workbook/worksheet/worksheet.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-Performance/RedundantBlockCall:
-  Exclude:
-    - 'lib/axlsx/util/zip_command.rb'
-    - 'test/support/capture_warnings.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 Performance/RedundantMatch:
   Exclude:
     - 'lib/axlsx.rb'

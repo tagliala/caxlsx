@@ -26,7 +26,7 @@ module Axlsx
     def open(output, &block)
       Dir.mktmpdir do |dir|
         @dir = dir
-        block.call(self)
+        yield(self)
         write_file
         zip_parts(output)
       end
