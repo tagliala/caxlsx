@@ -449,12 +449,6 @@ Style/RandomWithOffset:
     - 'lib/axlsx/drawing/vml_shape.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
-Style/RedundantCondition:
-  Exclude:
-    - 'lib/axlsx/drawing/area_series.rb'
-    - 'lib/axlsx/drawing/line_series.rb'
-
-# This cop supports safe autocorrection (--autocorrect).
 Style/RedundantFileExtensionInRequire:
   Exclude:
     - 'lib/axlsx.rb'
