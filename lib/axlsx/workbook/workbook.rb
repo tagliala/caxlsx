@@ -394,7 +394,7 @@ module Axlsx
     # @return [Cell, Array]
     def [](cell_def)
       sheet_name = cell_def.split('!')[0] if cell_def.include?('!')
-      worksheet =  self.worksheets.select { |s| s.name == sheet_name }.first
+      worksheet =  self.worksheets.find { |s| s.name == sheet_name }
       raise ArgumentError, 'Unknown Sheet' unless sheet_name && worksheet.is_a?(Worksheet)
 
       worksheet[cell_def.gsub(/.+!/, "")]
