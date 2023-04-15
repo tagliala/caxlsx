@@ -94,10 +94,6 @@ Style/ConditionalAssignment:
     - 'lib/axlsx/workbook/worksheet/data_bar.rb'
     - 'lib/axlsx/workbook/worksheet/rich_text_run.rb'
 
-Style/DocumentDynamicEvalDefinition:
-  Exclude:
-    - 'lib/axlsx/util/simple_typed_list.rb'
-
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
   Exclude:

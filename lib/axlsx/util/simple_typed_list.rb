@@ -163,9 +163,9 @@ module Axlsx
 
     DELEGATES.each do |method|
       class_eval %{
-        def #{method}(*args, &block)
-          @list.send(:#{method}, *args, &block)
-        end
+        def #{method}(*args, &block)            # def replace(*args, &block)
+          @list.send(:#{method}, *args, &block) #   @list.send(:replace, *args, &block)
+        end                                     # end
       }, __FILE__, __LINE__ - 4
     end
 
