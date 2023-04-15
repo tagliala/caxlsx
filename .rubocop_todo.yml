@@ -28,12 +28,6 @@ Layout/HeredocIndentation:
     - 'lib/axlsx/drawing/vml_drawing.rb'
     - 'lib/axlsx/drawing/vml_shape.rb'
 
-# Configuration parameters: MinSize.
-Performance/CollectionLiteralInLoop:
-  Exclude:
-    - 'lib/axlsx/package.rb'
-    - 'lib/axlsx/workbook/worksheet/page_margins.rb'
-
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: separated, grouped

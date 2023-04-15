@@ -166,6 +166,7 @@ module Axlsx
 
   # jpeg extension
   JPEG_EX = "jpeg".freeze
+  JPEG_EXS = ["jpeg", "jpg"].freeze
 
   # gif extension
   GIF_EX = "gif".freeze
