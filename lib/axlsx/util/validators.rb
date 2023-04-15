@@ -58,7 +58,7 @@ module Axlsx
       end
       v_class = v.is_a?(Class) ? v : v.class
       Array(types).each do |t|
-        return if v_class <= t
+        return nil if v_class <= t
       end
       raise ArgumentError, (ERR_TYPE % [v.inspect, name, types.inspect])
     end

@@ -51,10 +51,6 @@ Lint/DuplicateBranch:
     - 'lib/axlsx/workbook/worksheet/cell.rb'
     - 'lib/axlsx/workbook/worksheet/merged_cells.rb'
 
-Lint/NonLocalExitFromIterator:
-  Exclude:
-    - 'lib/axlsx/util/validators.rb'
-
 Lint/UselessAssignment:
   Exclude:
     - 'lib/axlsx/workbook/worksheet/header_footer.rb'
