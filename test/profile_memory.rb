@@ -20,8 +20,8 @@ report = MemoryProfiler.report do
       sheet << row
     end
   end
-  p.serialize("example_memory.xlsx", zip_command: 'zip')
+  p.serialize("tmp/example_memory.xlsx", zip_command: 'zip')
 end
 report.pretty_print
 
-File.delete("example_memory.xlsx")
+File.delete("tmp/example_memory.xlsx")

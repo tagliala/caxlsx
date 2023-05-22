@@ -9,7 +9,8 @@ coverage.data
 example.csv
 *.*~
 .DS_Store
-tmp
+/tmp
+!/tmp/.keep
 *.pem
 *.pfx
 examples/sprk2012

@@ -24,7 +24,7 @@ Benchmark.bmbm(30) do |x|
       end
     end
     p.use_autowidth = false
-    p.serialize("example_noautowidth.xlsx")
+    p.serialize("tmp/example_noautowidth.xlsx")
   end
 
   x.report('axlsx_autowidth') do
@@ -36,7 +36,7 @@ Benchmark.bmbm(30) do |x|
         end
       end
     end
-    p.serialize("example_autowidth.xlsx")
+    p.serialize("tmp/example_autowidth.xlsx")
   end
 
   x.report('axlsx_shared') do
@@ -49,7 +49,7 @@ Benchmark.bmbm(30) do |x|
       end
     end
     p.use_shared_strings = true
-    p.serialize("example_shared.xlsx")
+    p.serialize("tmp/example_shared.xlsx")
   end
 
   x.report('axlsx_stream') do
@@ -62,7 +62,7 @@ Benchmark.bmbm(30) do |x|
       end
     end
     s = p.to_stream
-    File.binwrite('example_streamed.xlsx', s.read)
+    File.binwrite('tmp/example_streamed.xlsx', s.read)
   end
 
   x.report('axlsx_zip_command') do
@@ -74,7 +74,7 @@ Benchmark.bmbm(30) do |x|
         end
       end
     end
-    p.serialize("example_zip_command.xlsx", zip_command: 'zip')
+    p.serialize("tmp/example_zip_command.xlsx", zip_command: 'zip')
   end
 
   x.report('csv') do
@@ -85,4 +85,4 @@ Benchmark.bmbm(30) do |x|
     end
   end
 end
-File.delete("example.csv", "example_streamed.xlsx", "example_shared.xlsx", "example_autowidth.xlsx", "example_noautowidth.xlsx", "example_zip_command.xlsx")
+File.delete("tmp/example.csv", "tmp/example_streamed.xlsx", "tmp/example_shared.xlsx", "tmp/example_autowidth.xlsx", "tmp/example_noautowidth.xlsx", "tmp/example_zip_command.xlsx")
