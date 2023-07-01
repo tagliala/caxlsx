@@ -31,6 +31,10 @@ Layout/ExtraSpacing:
 Lint:
   Enabled: true
 
+# Caxslx actually tests against `:true` or `:false` symbols
+Lint/BooleanSymbol:
+  Enabled: false
+
 Minitest:
   Enabled: true
 
@@ -48,6 +52,10 @@ Style:
 
 Style/Semicolon:
   AllowAsExpressionSeparator: true
+
+# Testing against multiple items is much faster than using `Array.include?`
+Style/MultipleComparison:
+  Enabled: false
 
 Style/NumericLiterals:
   Exclude:
