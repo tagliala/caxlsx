@@ -197,7 +197,7 @@ module Axlsx
       str << '<sheetView '
       serialized_attributes str
       str << '>'
-      @pane.to_xml_string(str) if @pane
+      @pane&.to_xml_string(str)
       @selections.each do |key, selection|
         selection.to_xml_string(str)
       end

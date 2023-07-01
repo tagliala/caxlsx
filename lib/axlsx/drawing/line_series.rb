@@ -92,8 +92,8 @@ module Axlsx
           str << '<c:marker><c:symbol val="' << @marker_symbol.to_s << '"/></c:marker>'
         end
 
-        @labels.to_xml_string(str) unless @labels.nil?
-        @data.to_xml_string(str) unless @data.nil?
+        @labels&.to_xml_string(str)
+        @data&.to_xml_string(str)
         str << '<c:smooth val="' << (smooth ? '1' : '0') << '"/>'
       end
     end

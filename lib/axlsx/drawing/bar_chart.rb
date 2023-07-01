@@ -117,7 +117,7 @@ module Axlsx
         str << '<c:grouping val="' << grouping.to_s << '"/>'
         str << '<c:varyColors val="' << vary_colors.to_s << '"/>'
         @series.each { |ser| ser.to_xml_string(str) }
-        @d_lbls.to_xml_string(str) if @d_lbls
+        @d_lbls&.to_xml_string(str)
         str << '<c:overlap val="' << @overlap.to_s << '"/>' unless @overlap.nil?
         str << '<c:gapWidth val="' << @gap_width.to_s << '"/>' unless @gap_width.nil?
         str << '<c:shape val="' << @shape.to_s << '"/>' unless @shape.nil?

@@ -158,7 +158,7 @@ module Axlsx
     def array_to_cells(values, options = {})
       DataTypeValidator.validate :array_to_cells, Array, values
       types, style, formula_values, escape_formulas, offset = options.delete(:types), options.delete(:style), options.delete(:formula_values), options.delete(:escape_formulas), options.delete(:offset)
-      offset.to_i.times { |index| self[index] = Cell.new(self) } if offset
+      offset&.to_i&.times { |index| self[index] = Cell.new(self) }
       values.each_with_index do |value, index|
         options[:style] = style.is_a?(Array) ? style[index] : style if style
         options[:type] = types.is_a?(Array) ? types[index] : types if types

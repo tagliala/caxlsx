@@ -23,7 +23,7 @@ module Axlsx
         bzos = new(zos)
         yield(bzos)
       ensure
-        bzos.flush if bzos
+        bzos&.flush
       end
     end
 
@@ -32,7 +32,7 @@ module Axlsx
         bzos = new(zos)
         yield(bzos)
       ensure
-        bzos.flush if bzos
+        bzos&.flush
       end
     end
 

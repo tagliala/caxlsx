@@ -54,8 +54,8 @@ module Axlsx
           str << '<a:srgbClr val="' << c << '"/>'
           str << '</a:solidFill></c:spPr></c:dPt>'
         end
-        @labels.to_xml_string str unless @labels.nil?
-        @data.to_xml_string str unless @data.nil?
+        @labels&.to_xml_string str
+        @data&.to_xml_string str
       end
       str
     end

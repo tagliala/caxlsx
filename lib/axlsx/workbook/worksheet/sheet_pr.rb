@@ -55,7 +55,7 @@ module Axlsx
       str << '<sheetPr '
       serialized_attributes(str)
       str << '>'
-      tab_color.to_xml_string(str, 'tabColor') if tab_color
+      tab_color&.to_xml_string(str, 'tabColor')
       outline_pr.to_xml_string(str) if @outline_pr
       page_setup_pr.to_xml_string(str)
       str << "</sheetPr>"

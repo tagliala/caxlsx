@@ -52,9 +52,9 @@ module Axlsx
           str << '<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>'
           str << '</c:spPr>'
         end
-        @xData.to_xml_string(str) unless @xData.nil?
-        @yData.to_xml_string(str) unless @yData.nil?
-        @bubbleSize.to_xml_string(str) unless @bubbleSize.nil?
+        @xData&.to_xml_string(str)
+        @yData&.to_xml_string(str)
+        @bubbleSize&.to_xml_string(str)
       end
       str
     end

@@ -80,7 +80,7 @@ module Axlsx
         str << '<c:grouping val="' << grouping.to_s << '"/>'
         str << '<c:varyColors val="' << vary_colors.to_s << '"/>'
         @series.each { |ser| ser.to_xml_string(str) }
-        @d_lbls.to_xml_string(str) if @d_lbls
+        @d_lbls&.to_xml_string(str)
         yield if block_given?
         axes.to_xml_string(str, ids: true)
         str << "</c:" << node_name << ">"

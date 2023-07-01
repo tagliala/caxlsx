@@ -213,7 +213,7 @@ module Axlsx
       str << '<c:chart>'
       @title.to_xml_string(str) unless @title.empty?
       str << '<c:autoTitleDeleted val="' << @title.nil?.to_s << '"/>'
-      @view_3D.to_xml_string(str) if @view_3D
+      @view_3D&.to_xml_string(str)
       str << '<c:floor><c:thickness val="0"/></c:floor>'
       str << '<c:sideWall><c:thickness val="0"/></c:sideWall>'
       str << '<c:backWall><c:thickness val="0"/></c:backWall>'

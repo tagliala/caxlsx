@@ -69,7 +69,7 @@ module Axlsx
       # Dxf elements have no attributes. All of the instance variables
       # are child elements.
       CHILD_ELEMENTS.each do |element|
-        send(element).to_xml_string(str) if send(element)
+        send(element)&.to_xml_string(str)
       end
       str << '</dxf>'
     end

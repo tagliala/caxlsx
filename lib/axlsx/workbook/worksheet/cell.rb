@@ -430,7 +430,7 @@ module Axlsx
 
       if contains_rich_text?
         string_width('', font_size) + value.autowidth
-      elsif styles.cellXfs[style].alignment && styles.cellXfs[style].alignment.wrap_text
+      elsif styles.cellXfs[style].alignment&.wrap_text
         max_width = 0
         value.to_s.split(/\r?\n/).each do |line|
           width = string_width(line, font_size)

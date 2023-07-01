@@ -108,8 +108,8 @@ module Axlsx
           str << '<a:ln w="' << ln_width.to_s << '"/>'
           str << '</c:spPr>'
         end
-        @xData.to_xml_string(str) unless @xData.nil?
-        @yData.to_xml_string(str) unless @yData.nil?
+        @xData&.to_xml_string(str)
+        @yData&.to_xml_string(str)
         str << '<c:smooth val="' << (smooth ? '1' : '0') << '"/>'
       end
       str

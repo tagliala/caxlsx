@@ -75,8 +75,8 @@ module Axlsx
           str << '</c:spPr>'
         end
 
-        @labels.to_xml_string(str) unless @labels.nil?
-        @data.to_xml_string(str) unless @data.nil?
+        @labels&.to_xml_string(str)
+        @data&.to_xml_string(str)
         # this is actually only required for shapes other than box
         str << '<c:shape val="' << shape.to_s << '"></c:shape>'
       end

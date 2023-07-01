@@ -138,8 +138,8 @@ module Axlsx
       str << '<xf '
       serialized_attributes str
       str << '>'
-      alignment.to_xml_string(str) if alignment
-      protection.to_xml_string(str) if protection
+      alignment&.to_xml_string(str)
+      protection&.to_xml_string(str)
       str << '</xf>'
     end
   end

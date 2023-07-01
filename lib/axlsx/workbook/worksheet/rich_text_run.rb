@@ -178,7 +178,7 @@ module Axlsx
     def autowidth(widtharray)
       return if value.nil?
 
-      if styles.cellXfs[style].alignment && styles.cellXfs[style].alignment.wrap_text
+      if styles.cellXfs[style].alignment&.wrap_text
         first = true
         value.to_s.split(/\r?\n/, -1).each do |line|
           if first

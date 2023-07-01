@@ -424,7 +424,7 @@ module Axlsx
         skip_edge = true
 
         borders_array.each do |b_opts|
-          if b_opts[:edges] && b_opts[:edges].include?(edge)
+          if b_opts[:edges]&.include?(edge)
             edge_b_opts = edge_b_opts.merge(b_opts)
             skip_edge = false
           end
@@ -485,7 +485,7 @@ module Axlsx
       str << '<styleSheet xmlns="' << XML_NS << '">'
       instance_vals = Axlsx.instance_values_for(self)
       [:numFmts, :fonts, :fills, :borders, :cellStyleXfs, :cellXfs, :cellStyles, :dxfs, :tableStyles].each do |key|
-        instance_vals[key.to_s].to_xml_string(str) unless instance_vals[key.to_s].nil?
+        instance_vals[key.to_s]&.to_xml_string(str)
       end
       str << '</styleSheet>'
     end

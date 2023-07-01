@@ -644,7 +644,7 @@ module Axlsx
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << worksheet_node
       serializable_parts.each do |item|
-        item.to_xml_string(str) if item
+        item&.to_xml_string(str)
       end
       str << '</worksheet>'
     end
