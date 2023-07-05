@@ -24,13 +24,13 @@ class TestSimpleTypedList < Test::Unit::TestCase
     assert_nothing_raised { @list[0] = 1 }
   end
 
-  def test_concat_assignment
+  def test_push_operator_assignment
     assert_raise(ArgumentError) { @list << nil }
     assert_raise(ArgumentError) { @list << "1" }
     assert_nothing_raised { @list << 1 }
   end
 
-  def test_concat_should_return_index
+  def test_push_operator_should_return_index
     assert_empty(@list)
     assert_equal(0, @list << 1)
     assert_equal(1, @list << 2)
@@ -40,13 +40,27 @@ class TestSimpleTypedList < Test::Unit::TestCase
     assert_equal(0, @list.index(2))
   end
 
-  def test_push_should_return_index
-    assert_equal(0, @list.push(1))
-    assert_equal(1, @list.push(2))
-    @list.delete_at 0
+  def test_push_should_be_an_alias_of_push_operator
+    assert_alias_method(@list, :push, :<<)
+  end
 
-    assert_equal(1, @list.push(3))
-    assert_equal(0, @list.index(2))
+  def test_concat_should_validate_type
+    other_list = [1, nil]
+
+    assert_raise(ArgumentError) { @list.concat(other_list) }
+  end
+
+  def test_concat_should_mutate_object
+    other_list = [1]
+    @list.concat(other_list)
+
+    assert_equal(other_list, @list)
+  end
+
+  def test_concat_should_return_mutated_object
+    other_list = [1]
+
+    assert_equal(other_list, @list.concat(other_list))
   end
 
   def test_locking

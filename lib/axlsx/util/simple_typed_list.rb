@@ -90,19 +90,19 @@ module Axlsx
       self
     end
 
-    # join operator
+    # concat operator
     # @param [Array] other the array to join
     # @raise [ArgumentError] if any of the values being joined are not
     # one of the allowed types
     # @return [SimpleTypedList]
-    def +(other)
+    def concat(other)
       other.each do |item|
         self << item
       end
-      super
+      self
     end
 
-    # Concat operator
+    # push operator
     # @param [Any] v the data to be added
     # @raise [ArgumentError] if the value being added is not one fo the allowed types
     # @return [Integer] returns the index of the item added.
