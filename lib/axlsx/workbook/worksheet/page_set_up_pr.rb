@@ -17,20 +17,21 @@ module Axlsx
 
     serializable_attributes :auto_page_breaks, :fit_to_page
 
+    # Flag indicating whether the sheet displays Automatic Page Breaks.
+    # @return [Boolean]
     attr_reader :auto_page_breaks
-    attr_reader :fit_to_page
 
     # Flag indicating whether the Fit to Page print option is enabled.
-    # @param [Boolean] value
     # @return [Boolean]
+    attr_reader :fit_to_page
+
+    # @see fit_to_page
     def fit_to_page=(value)
       Axlsx.validate_boolean value
       @fit_to_page = value
     end
 
-    # Flag indicating whether the sheet displays Automatic Page Breaks.
-    # @param [Boolean] value
-    # @return [Boolean]
+    # @see auto_page_breaks
     def auto_page_breaks=(value)
       Axlsx.validate_boolean value
       @auto_page_breaks = value
