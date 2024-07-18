@@ -19,3 +19,4 @@ examples/sprk2012
 *.qcachegrind
 *.iml
 .idea
+gemfiles/*.lock

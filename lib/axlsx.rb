@@ -27,6 +27,7 @@ require 'axlsx/package'
 # required gems
 require 'nokogiri'
 require 'zip'
+require 'zip/version'
 
 # core dependencies
 require 'bigdecimal'
