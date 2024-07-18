@@ -19,20 +19,38 @@ module Axlsx
     #
     # The directory and its contents are removed at the end of the block.
     def self.open(file_name, encrypter = nil)
-      Zip::OutputStream.open(file_name, encrypter) do |zos|
-        bzos = new(zos)
-        yield(bzos)
-      ensure
-        bzos.flush if bzos
+      if Zip::VERSION >= '2.4'
+        Zip::OutputStream.open(file_name, encrypter: encrypter) do |zos|
+          bzos = new(zos)
+          yield(bzos)
+        ensure
+          bzos.flush if bzos
+        end
+      else
+        Zip::OutputStream.open(file_name, encrypter) do |zos|
+          bzos = new(zos)
+          yield(bzos)
+        ensure
+          bzos.flush if bzos
+        end
       end
     end
 
     def self.write_buffer(io = ::StringIO.new, encrypter = nil)
-      Zip::OutputStream.write_buffer(io, encrypter) do |zos|
-        bzos = new(zos)
-        yield(bzos)
-      ensure
-        bzos.flush if bzos
+      if Zip::VERSION >= '2.4'
+        Zip::OutputStream.write_buffer(io, encrypter: encrypter) do |zos|
+          bzos = new(zos)
+          yield(bzos)
+        ensure
+          bzos.flush if bzos
+        end
+      else
+        Zip::OutputStream.write_buffer(io, encrypter) do |zos|
+          bzos = new(zos)
+          yield(bzos)
+        ensure
+          bzos.flush if bzos
+        end
       end
     end
 

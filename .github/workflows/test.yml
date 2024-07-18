@@ -30,6 +30,9 @@ jobs:
             allow_failures: 'allow failures'
           - ruby: jruby-head
             allow_failures: 'allow failures'
+          - ruby: 3.3
+            gemfile: 'gemfiles/rubyzip_3.gemfile'
+            allow_failures: 'allow failures'
 
     steps:
     - uses: actions/checkout@v4
