@@ -267,6 +267,13 @@ class TestStyles < Minitest::Test
     assert(xf.applyAlignment, "alignment applied")
   end
 
+  def test_add_style_frozen
+    @styles.add_style({ border: { style: :thin, color: "0000FFFF", edges: [:top, :bottom] }.freeze }.freeze)
+    parts = @styles.borders.last.prs
+
+    assert_equal(2, (parts.map { |pr| pr.name.to_s }.sort && ['bottom', 'top']).size, "specify two edges, and you get two border prs")
+  end
+
   def test_basic_add_style_dxf
     border_count = @styles.borders.size
     @styles.add_style border: { style: :thin, color: "FFFF0000" }, type: :dxf

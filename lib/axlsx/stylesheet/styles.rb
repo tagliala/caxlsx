@@ -227,25 +227,28 @@ module Axlsx
     # An index for cell styles where keys are styles codes as per Axlsx::Style and values are Cell#raw_style
     # The reason for the backward key/value ordering is that style lookup must be most efficient, while `add_style` can be less efficient
     def add_style(options = {})
+      opts = options.dup
       # Default to :xf
-      options[:type] ||= :xf
+      opts[:type] ||= :xf
 
-      raise ArgumentError, "Type must be one of [:xf, :dxf]" unless [:xf, :dxf].include?(options[:type])
+      raise ArgumentError, "Type must be one of [:xf, :dxf]" unless [:xf, :dxf].include?(opts[:type])
 
-      if options[:border].is_a?(Hash)
-        if options[:border][:edges] == :all
-          options[:border][:edges] = Axlsx::Border::EDGES
-        elsif options[:border][:edges]
-          options[:border][:edges] = options[:border][:edges].map(&:to_sym) ### normalize for style caching
+      if opts[:border].is_a?(Hash)
+        if opts[:border][:edges] == :all
+          opts[:border] = opts[:border].dup
+          opts[:border][:edges] = Axlsx::Border::EDGES
+        elsif opts[:border][:edges]
+          opts[:border] = opts[:border].dup
+          opts[:border][:edges] = opts[:border][:edges].map(&:to_sym) ### normalize for style caching
         end
       end
 
-      if options[:type] == :xf
+      if opts[:type] == :xf
         # Check to see if style in cache already
 
         font_defaults = { name: @fonts.first.name, sz: @fonts.first.sz, family: @fonts.first.family }
 
-        raw_style = { type: :xf }.merge(font_defaults, options)
+        raw_style = { type: :xf }.merge(font_defaults, opts)
 
         if raw_style[:format_code]
           raw_style.delete(:num_fmt)
@@ -258,21 +261,21 @@ module Axlsx
         end
       end
 
-      fill = parse_fill_options options
-      font = parse_font_options options
-      numFmt = parse_num_fmt_options options
-      border = parse_border_options options
-      alignment = parse_alignment_options options
-      protection = parse_protection_options options
+      fill = parse_fill_options opts
+      font = parse_font_options opts
+      numFmt = parse_num_fmt_options opts
+      border = parse_border_options opts
+      alignment = parse_alignment_options opts
+      protection = parse_protection_options opts
 
-      style = case options[:type]
+      style = case opts[:type]
               when :dxf
                 Dxf.new fill: fill, font: font, numFmt: numFmt, border: border, alignment: alignment, protection: protection
               else
                 Xf.new fillId: fill || 0, fontId: font || 0, numFmtId: numFmt || 0, borderId: border || 0, alignment: alignment, protection: protection, applyFill: !fill.nil?, applyFont: !font.nil?, applyNumberFormat: !numFmt.nil?, applyBorder: !border.nil?, applyAlignment: !alignment.nil?, applyProtection: !protection.nil?
               end
 
-      if options[:type] == :xf
+      if opts[:type] == :xf
         xf_index = (cellXfs << style)
 
         # Add styles to style_index cache for reuse
