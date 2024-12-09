@@ -211,7 +211,12 @@ module Axlsx
     # @return [Zip::Entry]
     def zip_entry_for_part(part)
       timestamp = Zip::DOSTime.at(@core.created.to_i)
-      Zip::Entry.new("", part[:entry], "", "", 0, 0, Zip::Entry::DEFLATED, 0, timestamp)
+
+      if Zip::VERSION >= '2.4'
+        Zip::Entry.new("", part[:entry], time: timestamp)
+      else
+        Zip::Entry.new("", part[:entry], "", "", 0, 0, Zip::Entry::DEFLATED, 0, timestamp)
+      end
     end
 
     # The parts of a package

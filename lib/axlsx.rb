@@ -7,6 +7,7 @@ require 'htmlentities'
 require 'marcel'
 require 'nokogiri'
 require 'zip'
+require 'zip/version'
 
 # Ruby core dependencies
 require 'cgi'
